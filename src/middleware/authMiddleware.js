@@ -26,38 +26,38 @@ const authMiddleware = async (req, res, next) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        // Fetch role ID from `members` table
-        const member = await Member.findOne({
-            where: { user: user.id },
-            attributes: ["role"],
-        });
+        // // Fetch role ID from `members` table
+        // const member = await Member.findOne({
+        //     where: { user: user.id },
+        //     attributes: ["role"],
+        // });
 
-        if (!member) {
-            console.log(`No role assigned for user_id: ${user.id}`);
-            return res.status(403).json({ error: "User has no assigned role" });
-        }
+        // if (!member) {
+        //     console.log(`No role assigned for user_id: ${user.id}`);
+        //     return res.status(403).json({ error: "User has no assigned role" });
+        // }
 
-        console.log(`User role ID from members table: ${member.role}`);
+        // console.log(`User role ID from members table: ${member.role}`);
 
-        // Fetch role name from `roles` table
-        const roleData = await Role.findOne({
-            where: { id: member.role },
-            attributes: ["name"],
-        });
+        // // Fetch role name from `roles` table
+        // const roleData = await Role.findOne({
+        //     where: { id: member.role },
+        //     attributes: ["name"],
+        // });
 
-        if (!roleData) {
-            console.log(`No matching role found in roles table for role ID: ${member.role}`);
-            return res.status(403).json({ error: "Role not found" });
-        }
+        // if (!roleData) {
+        //     console.log(`No matching role found in roles table for role ID: ${member.role}`);
+        //     return res.status(403).json({ error: "Role not found" });
+        // }
 
-        console.log(`User role name from roles table: ${roleData.name}`);
+        // console.log(`User role name from roles table: ${roleData.name}`);
 
         // Attach user details and role to request
         req.user = {
             id: user.id,
             name: user.name,
             email: user.email,
-            role: roleData.name, // Attach role name
+            // role: roleData.name, // Attach role name
         };
 
         console.log("Final Authenticated User Data:", req.user);
