@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Routes
 app.use('/v1/auth', authRoutes);
-app.use('/v1/communities', communityRoutes);
+app.use('/v1/community', communityRoutes);
 app.use('/v1/role', roleRoutes);
 app.use('/v1/member', memberRoutes);
 
